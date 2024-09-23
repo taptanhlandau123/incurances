@@ -1,6 +1,7 @@
 <!--
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
             margin: 0;
             padding: 20px;
         }
+
         .container {
             max-width: 600px;
             margin: 0 auto;
@@ -19,30 +21,20 @@
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         h2 {
             text-align: center;
         }
+
         .result {
             margin-top: 20px;
             padding: 10px;
             background-color: #e0f7fa;
             border: 1px solid #00acc1;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2>Kết quả Dự đoán Chi phí Bảo hiểm</h2>
@@ -71,29 +63,11 @@
         {% if prediction %}
         <div class="result">
             <h3>Kết quả dự đoán: {{ prediction }} USD</h3>
-
-            <h4>Đánh giá mô hình:</h4>
-            <table>
-                <tr>
-                    <th></th>
-                    <th>RMSE</th>
-                    <th>R-squared</th>
-                </tr>
-                <tr>
-                    <td>Train</td>
-                    <td>{{ rmse_train }}</td>
-                    <td>{{ r2_train }}</td>
-                </tr>
-                <tr>
-                    <td>Test</td>
-                    <td>{{ rmse_test }}</td>
-                    <td>{{ r2_test }}</td>
-                </tr>
-            </table>
         </div>
         {% endif %}
     </div>
 </body>
+
 </html>
 -->
 <!DOCTYPE html>
@@ -116,11 +90,43 @@
             margin: 0 auto;
             background-color: #fff;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         h2 {
             text-align: center;
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
         }
 
         .result {
@@ -128,6 +134,25 @@
             padding: 10px;
             background-color: #e0f7fa;
             border: 1px solid #00acc1;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
@@ -137,29 +162,47 @@
         <h2>Kết quả Dự đoán Chi phí Bảo hiểm</h2>
         <form method="POST">
             <label for="age">Tuổi:</label>
-            <input type="text" id="age" name="age" required><br><br>
+            <input type="text" id="age" name="age" required>
             <label for="BMI">BMI:</label>
-            <input type="text" id="BMI" name="BMI" required><br><br>
+            <input type="text" id="BMI" name="BMI" required>
             <label for="children">Số con:</label>
-            <input type="text" id="children" name="children" required><br><br>
+            <input type="text" id="children" name="children" required>
             <label for="smoke">Hút thuốc:</label>
             <select id="smoke" name="smoke" required>
                 <option value="yes">Có</option>
                 <option value="no">Không</option>
-            </select><br><br>
+            </select>
             <label for="area">Khu vực:</label>
             <select id="area" name="area" required>
                 <option value="northeast">Northeast</option>
                 <option value="northwest">Northwest</option>
                 <option value="southeast">Southeast</option>
                 <option value="southwest">Southwest</option>
-            </select><br><br>
+            </select>
             <button type="submit">Dự đoán</button>
         </form>
 
         {% if prediction %}
         <div class="result">
             <h3>Kết quả dự đoán: {{ prediction }} USD</h3>
+            <h4>Đánh giá mô hình:</h4>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>RMSE</th>
+                    <th>R-squared</th>
+                </tr>
+                <tr>
+                    <td>Train</td>
+                    <td>{{ rmse_train }}</td>
+                    <td>{{ r2_train }}</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>{{ rmse_test }}</td>
+                    <td>{{ r2_test }}</td>
+                </tr>
+            </table>
         </div>
         {% endif %}
     </div>
