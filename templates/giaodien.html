@@ -90,26 +90,29 @@
         <h2>Kết quả Dự đoán Chi phí Bảo hiểm</h2>
         <form method="POST">
             <label for="age">Tuổi:</label>
-            <input type="text" id="age" name="age" value="{{ request.form['age'] }}" required>
+            <input type="text" id="age" name="age" value="{{ request.form.age }}" required>
             <label for="BMI">BMI:</label>
-            <input type="text" id="BMI" name="BMI" value="{{ request.form['BMI'] }}" required>
+            <input type="text" id="BMI" name="BMI" value="{{ request.form.BMI }}" required>
             <label for="children">Số con:</label>
-            <input type="text" id="children" name="children" value="{{ request.form['children'] }}" required>
+            <input type="text" id="children" name="children" value="{{ request.form.children }}" required>
             <label for="smoke">Hút thuốc:</label>
             <select id="smoke" name="smoke" required>
-                <option value="yes" {% if request.form['smoke']=='yes' %}selected{% endif %}>Có</option>
-                <option value="no" {% if request.form['smoke']=='no' %}selected{% endif %}>Không</option>
+                <option value="yes" {% if request.form.smoke == 'yes' %}selected{% endif %}>Có</option>
+                <option value="no" {% if request.form.smoke == 'no' %}selected{% endif %}>Không</option>
             </select>
             <label for="area">Khu vực:</label>
             <select id="area" name="area" required>
-                <option value="northeast" {% if request.form['area']=='northeast' %}selected{% endif %}>Northeast
-                </option>
-                <option value="northwest" {% if request.form['area']=='northwest' %}selected{% endif %}>Northwest
-                </option>
-                <option value="southeast" {% if request.form['area']=='southeast' %}selected{% endif %}>Southeast
-                </option>
-                <option value="southwest" {% if request.form['area']=='southwest' %}selected{% endif %}>Southwest
-                </option>
+                <option value="northeast" {% if request.form.area == 'northeast' %}selected{% endif %}>Northeast</option>
+                <option value="northwest" {% if request.form.area == 'northwest' %}selected{% endif %}>Northwest</option>
+                <option value="southeast" {% if request.form.area == 'southeast' %}selected{% endif %}>Southeast</option>
+                <option value="southwest" {% if request.form.area == 'southwest' %}selected{% endif %}>Southwest</option>
+            </select>
+            <label for="model_choice">Chọn Mô hình:</label>
+            <select id="model_choice" name="model_choice" required>
+                <option value="lasso" {% if request.form.model_choice == 'lasso' %}selected{% endif %}>Lasso Regression</option>
+                <option value="ridge" {% if request.form.model_choice == 'ridge' %}selected{% endif %}>Ridge Regression</option>
+                <option value="elasticnet" {% if request.form.model_choice == 'elasticnet' %}selected{% endif %}>ElasticNet Regression</option>
+                <option value="stacking" {% if request.form.model_choice == 'stacking' %}selected{% endif %}>Stacking</option>
             </select>
             <button type="submit">Dự đoán</button>
         </form>
@@ -117,25 +120,10 @@
         {% if prediction %}
         <div class="result">
             <h3>Kết quả dự đoán: {{ prediction }} USD</h3>
-            <h4>Đánh giá mô hình:</h4>
-            <table>
-                <tr>
-                    <th></th>
-                    <th>RMSE</th>
-                    <th>R-squared</th>
-                </tr>
-                <tr>
-                    <td>Train</td>
-                    <td>{{ rmse_train }}</td>
-                    <td>{{ r2_train }}</td>
-                </tr>
-                <tr>
-                    <td>Test</td>
-                    <td>{{ rmse_test }}</td>
-                    <td>{{ r2_test }}</td>
-                </tr>
-            </table>
+            
         </div>
         {% endif %}
     </div>
 </body>
+
+</html>
