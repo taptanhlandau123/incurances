@@ -1,75 +1,3 @@
-<!--
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insurance Prediction</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            text-align: center;
-        }
-
-        .result {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #e0f7fa;
-            border: 1px solid #00acc1;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <h2>Kết quả Dự đoán Chi phí Bảo hiểm</h2>
-        <form method="POST">
-            <label for="age">Tuổi:</label>
-            <input type="text" id="age" name="age" required><br><br>
-            <label for="BMI">BMI:</label>
-            <input type="text" id="BMI" name="BMI" required><br><br>
-            <label for="children">Số con:</label>
-            <input type="text" id="children" name="children" required><br><br>
-            <label for="smoke">Hút thuốc:</label>
-            <select id="smoke" name="smoke" required>
-                <option value="yes">Có</option>
-                <option value="no">Không</option>
-            </select><br><br>
-            <label for="area">Khu vực:</label>
-            <select id="area" name="area" required>
-                <option value="northeast">Northeast</option>
-                <option value="northwest">Northwest</option>
-                <option value="southeast">Southeast</option>
-                <option value="southwest">Southwest</option>
-            </select><br><br>
-            <button type="submit">Dự đoán</button>
-        </form>
-
-        {% if prediction %}
-        <div class="result">
-            <h3>Kết quả dự đoán: {{ prediction }} USD</h3>
-        </div>
-        {% endif %}
-    </div>
-</body>
-
-</html>
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -162,22 +90,26 @@
         <h2>Kết quả Dự đoán Chi phí Bảo hiểm</h2>
         <form method="POST">
             <label for="age">Tuổi:</label>
-            <input type="text" id="age" name="age" required>
+            <input type="text" id="age" name="age" value="{{ request.form['age'] }}" required>
             <label for="BMI">BMI:</label>
-            <input type="text" id="BMI" name="BMI" required>
+            <input type="text" id="BMI" name="BMI" value="{{ request.form['BMI'] }}" required>
             <label for="children">Số con:</label>
-            <input type="text" id="children" name="children" required>
+            <input type="text" id="children" name="children" value="{{ request.form['children'] }}" required>
             <label for="smoke">Hút thuốc:</label>
             <select id="smoke" name="smoke" required>
-                <option value="yes">Có</option>
-                <option value="no">Không</option>
+                <option value="yes" {% if request.form['smoke']=='yes' %}selected{% endif %}>Có</option>
+                <option value="no" {% if request.form['smoke']=='no' %}selected{% endif %}>Không</option>
             </select>
             <label for="area">Khu vực:</label>
             <select id="area" name="area" required>
-                <option value="northeast">Northeast</option>
-                <option value="northwest">Northwest</option>
-                <option value="southeast">Southeast</option>
-                <option value="southwest">Southwest</option>
+                <option value="northeast" {% if request.form['area']=='northeast' %}selected{% endif %}>Northeast
+                </option>
+                <option value="northwest" {% if request.form['area']=='northwest' %}selected{% endif %}>Northwest
+                </option>
+                <option value="southeast" {% if request.form['area']=='southeast' %}selected{% endif %}>Southeast
+                </option>
+                <option value="southwest" {% if request.form['area']=='southwest' %}selected{% endif %}>Southwest
+                </option>
             </select>
             <button type="submit">Dự đoán</button>
         </form>
@@ -207,5 +139,3 @@
         {% endif %}
     </div>
 </body>
-
-</html>
