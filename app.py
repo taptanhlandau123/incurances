@@ -94,7 +94,8 @@ import pandas as pd
 app = Flask(__name__)
 
 # Đọc dữ liệu từ file CSV
-file_path = "C:/Users/fpt/Documents/insurance.csv"  # Đường dẫn đến file CSV
+file_path = "insurances.csv"
+
 insurance = pd.read_csv(file_path)
 
 # Mã hóa biến phân loại
