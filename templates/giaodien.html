@@ -109,9 +109,9 @@
             </select>
             <label for="model_choice">Chọn Mô hình:</label>
             <select id="model_choice" name="model_choice" required>
+                <option value="linear" {% if request.form.model_choice == 'linear' %}selected{% endif %}>Linear Regression</option>
                 <option value="lasso" {% if request.form.model_choice == 'lasso' %}selected{% endif %}>Lasso Regression</option>
-                <option value="ridge" {% if request.form.model_choice == 'ridge' %}selected{% endif %}>Ridge Regression</option>
-                <option value="elasticnet" {% if request.form.model_choice == 'elasticnet' %}selected{% endif %}>ElasticNet Regression</option>
+                <option value="mlp" {% if request.form.model_choice == 'mlp' %}selected{% endif %}>MLP Regressor</option>
                 <option value="stacking" {% if request.form.model_choice == 'stacking' %}selected{% endif %}>Stacking</option>
             </select>
             <button type="submit">Dự đoán</button>
@@ -120,7 +120,6 @@
         {% if prediction %}
         <div class="result">
             <h3>Kết quả dự đoán: {{ prediction }} USD</h3>
-            
         </div>
         {% endif %}
     </div>
